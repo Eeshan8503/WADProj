@@ -32,7 +32,7 @@
     $sqll="UPDATE Game1 Set `Current Score` = '$score', `Current Batsman`='$batsman', `Current Bowler`='$bowler', `Wickets Down`='$wicket' WHERE Sno='$sno';";
 
     if ($con->query($sqll) == true) {
-        echo "Record updated successfully";
+        // echo "Record updated successfully";
       } else {
         echo "Error updating record: " . $con->error;
       }
@@ -41,13 +41,13 @@
     <div class="container">
         <?php
             require 'DBconnect.php';
-            $sql="SELECT Team1, Team2 FROM `Game1` WHERE Sno='$sno';";
+            $sql="SELECT Team1, Team2, `Current Score`, `Wickets Down` FROM `Game1` WHERE Sno='$sno';";
             $result=$con->query($sql);
             if($result->num_rows >0){
                 // echo "Successfully inserted";
                 while($row=$result->fetch_assoc()){
                     echo "<h2>".$row["Team1"]. " vs ".$row["Team2"]."</h2>";
-                    
+                    echo "<h3>".$row["Current Score"]. " / ".$row["Wickets Down"]."</h3>";   
                 }
             }
             $con->close();
